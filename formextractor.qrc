@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>form.html</file>
-        <file>import_gcode.png</file>
-        <file>saveObj.png</file>
-    </qresource>
-</RCC>
