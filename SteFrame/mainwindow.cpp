@@ -4,6 +4,9 @@
 #include <QTabWidget>
 #include <QBrush>
 #include <QMdiArea>
+#include <QtWidgets>
+
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,18 +27,18 @@ MainWindow::~MainWindow()
 void MainWindow::paint(const QString &filename)
 {
     centralWidget = new QMdiSubWindow(ui->widget);
-    centralWidget->setWindowTitle(filename);
-    centralWidget->activateWindow();
-    centralWidget->resize(QSize(300,300));
-    centralWidget->show();
 
     QPixmap pixmap=QPixmap::fromImage(img);
-    pixmap = pixmap.scaled(centralWidget->size());
-    centralWidget->setAutoFillBackground(true);
-    QPalette palette;
-    palette.setBrush(centralWidget->backgroundRole(), QBrush(pixmap));
-    centralWidget->setPalette(palette);
-    centralWidget->repaint();
+
+    QGraphicsView *view = new QGraphicsView(centralWidget->widget());
+    QGraphicsScene *scene = new QGraphicsScene;
+
+    scene->addPixmap(pixmap);
+    view->setWindowTitle(filename);
+    view->setScene(scene);
+    view->resize(img.width() + 10, img.height() + 10);
+    view->show();
+
  }
 
 void MainWindow::createActions()
@@ -48,7 +51,7 @@ void MainWindow::createActions()
     exitAct = new QAction(tr("E&xit"), this);
     exitAct->setStatusTip(tr("Exit the application"));
     exitAct->setShortcuts(QKeySequence::Quit);
-    connect(exitAct, SIGNAL(triggered()), this, SLOT(slotclose()));
+    connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
 
     saveAct = new QAction(QIcon(":/Images/save.png"),tr("S&ave"), this);
     saveAct->setStatusTip(tr("Save the Image"));
@@ -86,6 +89,18 @@ void MainWindow::createToolbars()
     statusBar();
 }
 
+bool MainWindow::savePic(const QString &fileName)
+{
+    if(!(img.save(fileName)))
+    {
+        QMessageBox::warning(this, tr("Application"),
+                             tr("Cannot save Picture."));
+        return false;
+    }
+    statusBar()->showMessage(tr("File saved"), 2000);
+    return true;
+}
+
 void MainWindow::slotabout()
 {
     QMessageBox::about(this, tr("About Steganography"),tr("The <b>Steganography</b>  "
@@ -93,33 +108,67 @@ void MainWindow::slotabout()
 
 }
 
-void MainWindow::slotclose()
-{
-
-}
-
 void MainWindow::slotopenFile()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open Image"),"",
-                                                   tr("PNG(*.png);;BMP(*.bmp);;JPG(*.jpg);;ALL files(*.*)"));
-    if (filename.isEmpty())
+    //if there is an image have already been opened,RETURN.
+    if (!(curFile.isEmpty()))
     {
-        QMessageBox::information(this,tr("Open Image"), tr("Please select an image to open"));
-                                 filename=QFileDialog::getOpenFileName(this,tr("Open Image"),"",
-                                                                       tr("PNG(*.png);;BMP(*.bmp);;JPG(*.jpg);;ALL files(*.*)"));
+        QMessageBox::information(this,tr("Open Image"), tr("Already have an image opened"));
         return;
     }
 
+    curFile = QFileDialog::getOpenFileName(this, tr("Open Image"),"",
+                                           tr("PNG(*.png);;BMP(*.bmp);;JPG(*.jpg);;ALL files(*.*)"));
+    if (curFile.isEmpty())
+    {
+        QMessageBox::information(this,tr("Open Image"), tr("Please select an image to open"));
+        curFile = QFileDialog::getOpenFileName(this,tr("Open Image"),"",
+                                               tr("PNG(*.png);;BMP(*.bmp);;JPG(*.jpg);;ALL files(*.*)"));
+        return;
+    }
 
-    if (!(img.load(filename,0)))
+    //Save File in (QImage img).
+    if (!(img.load(curFile,0)))
     {
        QMessageBox::information(this,tr("Unable to open the Image"), tr("Please select a valid image."));
        return;
     }
-    paint(filename);
+
+    //show picture
+    paint(curFile);
 }
 
-void MainWindow::slotsaveFile()
+bool MainWindow::slotsaveFile()
 {
+    if (curFile.isEmpty())
+    {
+        QMessageBox::information(this,tr("No Image to Save"), tr("Please open an image."));
+        return false;
+    }
+    else
+    {
+        return slotsaveAs();
+    }
+}
 
+bool MainWindow::slotsaveAs()
+{
+    QFileDialog dialog(centralWidget);
+    QStringList files;
+
+    dialog.setWindowTitle(tr("Save As"));
+    dialog.setWindowModality(Qt::WindowModal);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.setNameFilter(tr("Image Files(*.jpg *.png)"));
+
+    if (dialog.exec())
+    {
+        files = dialog.selectedFiles();
+    }
+    else
+    {
+        return false;
+    }
+
+    return savePic(files.at(0));
 }

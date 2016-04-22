@@ -6,6 +6,8 @@
 #include <QtWidgets/QWidget>
 #include <QImage>
 #include <QPainter>
+#include <iostream.h>
+#include <qfiledialog.h>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -29,9 +31,9 @@ public:
 
 private slots:
     void slotabout();
-    void slotclose();
     void slotopenFile();
-    void slotsaveFile();
+    bool slotsaveFile();
+    bool slotsaveAs();
 
 private:
     QMenu *fileMenu;
@@ -45,9 +47,12 @@ private:
 
     QToolBar *toolbar_;
 
+    QString curFile;
+
     void createActions();
     void createMenus();
     void createToolbars();
+    bool savePic(const QString &fileName);
 
 protected:
     void paint(const QString &filename);
