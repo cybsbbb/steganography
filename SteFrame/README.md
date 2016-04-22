@@ -1,2 +1,0 @@
-# steganography
-yeah~~
