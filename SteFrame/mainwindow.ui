@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>633</width>
-    <height>332</height>
+    <width>765</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,6 +24,139 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>511</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="picLayout">
+     <item>
+      <widget class="QWidget" name="picWidget" native="true"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>20</y>
+      <width>181</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="styleSheet">
+        <string notr="true">font: 18pt &quot;Blackadder ITC&quot;;</string>
+       </property>
+       <property name="title">
+        <string>Algorithm</string>
+       </property>
+       <widget class="QGroupBox" name="ste_groupBox">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>50</y>
+          <width>181</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 16pt &quot;Bradley Hand ITC&quot;;</string>
+        </property>
+        <property name="title">
+         <string>Stegano</string>
+        </property>
+        <widget class="QPushButton" name="steButton">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>120</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 9pt &quot;Bodoni MT&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Do Stegano</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="inputEdit">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>60</y>
+           <width>131</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 9pt &quot;Gadugi&quot;;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="show_groupBox">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>181</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 15pt &quot;Bradley Hand ITC&quot;;</string>
+        </property>
+        <property name="title">
+         <string>Show Message</string>
+        </property>
+        <widget class="QPushButton" name="showButton">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>140</y>
+           <width>81</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 9pt &quot;Berlin Sans FB&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Show</string>
+         </property>
+        </widget>
+        <widget class="QTextBrowser" name="showBrowser">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>131</width>
+           <height>81</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
