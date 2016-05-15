@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/bbox.png</file>
+        <file>Images/copy.png</file>
+        <file>Images/delete.png</file>
+        <file>Images/fileopen.png</file>
+        <file>Images/filesave.png</file>
+        <file>Images/flat.png</file>
+        <file>Images/flatlines.png</file>
+        <file>Images/frame.png</file>
+        <file>Images/fronview.png</file>
+        <file>Images/import_gcode.png</file>
+        <file>Images/lightoff.png</file>
+        <file>Images/lighton.png</file>
+        <file>Images/no_edit.png</file>
+        <file>Images/orientation_back32.png</file>
+        <file>Images/orientation_bottom32.png</file>
+        <file>Images/orientation_front32.png</file>
+        <file>Images/orientation_iso32.png</file>
+        <file>Images/orientation_left32.png</file>
+        <file>Images/orientation_right32.png</file>
+        <file>Images/orientation_top32.png</file>
+        <file>Images/points.png</file>
+        <file>Images/ResetButton.png</file>
+        <file>Images/save.png</file>
+        <file>Images/saveObj.png</file>
+        <file>Images/showGcode.png</file>
+        <file>Images/sky.jpg</file>
+        <file>Images/smooth.png</file>
+        <file>Images/support.png</file>
+        <file>Images/test.png</file>
+        <file>Images/TigerMain.png</file>
+        <file>Images/wire.png</file>
+    </qresource>
+</RCC>
